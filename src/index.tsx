@@ -6,7 +6,7 @@ import { mutators } from "./mutators";
 import { Reflect } from "@rocicorp/reflect";
 import { nanoid } from "nanoid";
 
-const userID = nanoid();
+const userID = "u42";
 const roomID: string | undefined = import.meta.env.VITE_ROOM_ID;
 if (roomID === undefined || roomID === "") {
   throw new Error("VITE_ROOM_ID required");
