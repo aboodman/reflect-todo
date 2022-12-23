@@ -23,12 +23,15 @@ const r = new Reflect({
   mutators,
 });
 
-// Workaround for https://github.com/rocicorp/reflect-server/issues/146.
-// We don't receive initial data until first mutation after connection.
-void r.mutate.init();
+r.subscribe(
+  async tx => await tx.scan().entries().toArray(), 
+  {
+    onData(result) {
+      console.log("first subscribe", result)
+    }
+  }
+)
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <App reflect={r} />
-  </React.StrictMode>
+  <App reflect={r} userID={userID} roomID={roomID}/>
 );
